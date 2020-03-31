@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     WebView webView;
-    TextView text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,28 +26,14 @@ public class MainActivity extends AppCompatActivity {
         webView = (WebView) findViewById(R.id.webView);
         // loadUrl
         webView.loadUrl("https://academy.codershiyar.com");
-        webView.setWebViewClient(new WebViewClient());
 
-        text = (TextView) findViewById(R.id.text);
-        text.setText(webView.getUrl());
 
-        webView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                if(event.getAction()  == MotionEvent.ACTION_UP){
-                    text.setText(webView.getUrl());
-                }
-               return false;
-            }
-        });
-
+        // loadUrl()
+        // goBack()
 
         // reload()
         // goForward()
-        // loadUrl()
-        // getTitle()
-        // getUrl()
+
 
         WebSettings webSettings = webView.getSettings();
         // سماح للجافا  سكربت بالعمل
@@ -63,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setDisplayZoomControls(true);
         webSettings.setSupportZoom(true);
 
+
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -74,18 +62,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    public  void reload(View view){
+    public void goFoward(View view){
+        webView.goForward();
+    }
+    public void reload(View view){
         webView.reload();
     }
-
-    public  void back(View view){
-        if(webView.canGoBack()== true){
-            webView.goBack();
-        }
+    public void goBack(View view){
+        webView.goBack();
     }
-    public void forward(View view){
-        if(webView.canGoForward() == true){
-            webView.goForward();
-        }
+    public void loadHome(View view){
+        webView.loadUrl("https://academy.codershiyar.com");
+    }
+    public  void loadUrl(View view){
+        webView.loadUrl("https://academy.codershiyar.com/about.php");
     }
 }
