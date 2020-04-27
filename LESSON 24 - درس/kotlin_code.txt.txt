@@ -1,0 +1,13 @@
+ConnectivityManager connMgr =
+        (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+boolean isWifiConn = false;
+boolean isMobileConn = false;
+for (Network network : connMgr.getAllNetworks()) {
+    NetworkInfo networkInfo = connMgr.getNetworkInfo(network);
+    if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+        isWifiConn |= networkInfo.isConnected();
+    }
+    if (networkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+        isMobileConn |= networkInfo.isConnected();
+    }
+}
