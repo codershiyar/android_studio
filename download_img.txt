@@ -1,0 +1,64 @@
+    WebView mWebView;
+    String mUrl = "https://shiyarjemo.com/app" ;
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+//        mWebView = (WebView)findViewById(R.id.webView);
+//        mWebView.getSettings().setJavaScriptEnabled(true);
+//        mWebView.setWebViewClient(new WebViewClient());
+//
+//        registerForContextMenu(mWebView);
+//
+//        mWebView.loadUrl(mUrl);
+    }
+
+//    @Override
+//    public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo){
+//        super.onCreateContextMenu(contextMenu, view, contextMenuInfo);
+//
+//        final WebView.HitTestResult webViewHitTestResult = mWebView.getHitTestResult();
+//
+//        if (webViewHitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE ||
+//                webViewHitTestResult.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+//
+//            contextMenu.setHeaderTitle("Download Image...");
+//            contextMenu.setHeaderIcon(R.drawable.ic_launcher_background);
+//
+//            contextMenu.add(0, 1, 0, "Click to download")
+//                    .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//                        @Override
+//                        public boolean onMenuItemClick(MenuItem menuItem) {
+//
+//                            String DownloadImageURL = webViewHitTestResult.getExtra();
+//
+//                            if(URLUtil.isValidUrl(DownloadImageURL)){
+//
+//                                DownloadManager.Request mRequest = new DownloadManager.Request(Uri.parse(DownloadImageURL));
+//                                mRequest.allowScanningByMediaScanner();
+//
+//                                mRequest.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                               mRequest.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, DownloadImageURL);
+
+                                  if (Build.VERSION.SDK_INT >= 23) {
+                                       if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                               == PackageManager.PERMISSION_GRANTED) {
+                                            DownloadManager mDownloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                                            mDownloadManager.enqueue(mRequest);
+
+                                          Toast.makeText(MainActivity.this,"Image Downloaded Successfully...",Toast.LENGTH_LONG).show();
+
+                                         return true;
+                                      }}else{
+                                      ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                                     }
+                                      }
+
+                        else {
+                               Toast.makeText(MainActivity.this,"Sorry.. Something Went Wrong...",Toast.LENGTH_LONG).show();
+                           }
+                           return false;
+                       }
+                   });
+      }
+    }

@@ -1,0 +1,34 @@
+    
+كود :
+ implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+
+لاجل وضعها ضمن العنصر 
+dependencies {
+
+}
+في ملف 
+build.gradle 
+
+
+
+
+الكود المستخدم ضمن 
+LinearLayout 
+لاجل Swiperefresh 
+لاجل WebView
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp">
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
