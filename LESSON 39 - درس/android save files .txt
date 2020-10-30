@@ -1,0 +1,24 @@
+// 1: يجب اعطاء للتطبيق صلاحيات للقراءة او تعديل ملفات خارجية وايضا صلاحية وصول إلى انترنت 
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+ <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+// 2:  طلب إذن للوصول إلى ملفات للحفظ الملف 
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE  }, 1);
+// 3
+// طلب حصول على ملف من رابط لتحميلها عند الطلب
+                DownloadManager.Request myRequest = new DownloadManager.Request(Uri.parse(url));
+// طلب فحص الملف
+                myRequest.allowScanningByMediaScanner();
+// طلب تخزين نوع الملف الذي سيتم تحميلها في المتغير من نوع البيانات النصي
+                    String fileExtension = MimeTypeMap.getFileExtensionFromUrl(url);
+//طلب تحديد المسار للحفظ الملف  مع اسم وصيغة الملف 
+                    myRequest.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,("file."+fileExtension));
+// طلب عرض اشعار للمستخدم يفيد ان تحميل الملف اكتملت
+                    myRequest.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+// طلب من إدارة تحميلات في الهاتف بتنزيل الملف وحفظه
+                DownloadManager myFile = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+// هنا يتم تحديد اي ملف يجب يتنزيلها 
+                myFile.enqueue(myRequest);
+// هنا مجرد نص ارغب بان يظهر على شاشة المستخدم يفيد ان الملف بدء تحميلها
+                Toast.makeText(MainActivity.this, "جاري تحميل الملف ....", Toast.LENGTH_SHORT).show(); 
