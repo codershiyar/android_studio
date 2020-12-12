@@ -1,0 +1,6 @@
+  public void copyLink(View view){
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("copy","");
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(this, "تم نسخ ", Toast.LENGTH_LONG).show();
+    }
