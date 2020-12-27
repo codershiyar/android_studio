@@ -1,0 +1,5 @@
+        android:largeHeap="true"
+        android:usesCleartextTraffic="true"
+
+        android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+
